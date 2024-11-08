@@ -17,20 +17,18 @@
 (defn ui-root
   [state]
   [:div
-   [:div "Clicked: " (:counter state "not received yet")]
+   [:div
+    #_{:style {"translate" (str (:counter state 0) "px")}}
+    {:style {:translate (str (:counter state 0) "px")}}
+    "Clicked: " (:counter state "not received yet")]
    [:input {:type "submit"
             :on {:click (emit [:button/clicked])}
             :value "click me"}]
-   [:input {:type "text"
-            :name "input"
-            :value (:input state)
-            :on {:input (fn [e] ((emit [:input/value (-> e .-target .-value)]) e))}}]
-   [:div (:input state)]
    [:pre (pr-str state)]])
 
 (defn init-state
   []
-  {:input ""})
+  {})
 
 (defn update-state
   [state event tell-server]
@@ -41,8 +39,7 @@
     [:browser/refresh] state
 
     [:button/clicked] (do (tell-server [:button/click])
-                          (update state :input str "!!"))
-    [:input/value v] (assoc state :input v)
+                          state)
     [:counter/value n] (assoc state :counter n)
 
     _ (do (prn [:client/unhandled event])

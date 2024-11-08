@@ -21,7 +21,7 @@
                    :repl-options {:init-ns repl}
                    :resource-paths ["target"]
                    :clean-targets ^{:protect false} ["target"]
-                   :dependencies [[no.cjohansen/replicant "2024.09.29"]
+                   :dependencies [[no.cjohansen/replicant "0.2024.10.07"]
                                   [com.bhauman/figwheel-main "0.2.18"]
                                   [com.nextjournal/beholder "1.0.2"]
                                   [org.clojure/clojurescript "1.11.132"]
